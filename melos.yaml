@@ -1,0 +1,9 @@
+name: TodoApp
+
+packages:
+  - app/*
+  - core/*
+  - dependencies/*
+  - todo_module/*
+
+

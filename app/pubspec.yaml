@@ -34,6 +34,9 @@ dependencies:
     path: ../dependencies
   core: 
     path: ../core
+    
+  todo_module:
+    path: ../todo_module
 
 
   # The following adds the Cupertino Icons font to your application.

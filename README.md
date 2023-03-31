@@ -36,3 +36,7 @@ Possibilidade de alterar o Theme (light theme e dark theme).
 **Obs:** Não podem ser adicionadas tarefas com a data alvo para o mesmo dia, apenas para amanhã.
 
 As tarefas devem ser salvas no banco de dados local utilizando Hive.
+
+**Notas:**
+Instalação do melos 
+    dart pub global activate melos
