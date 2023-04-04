@@ -11,7 +11,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-    
+  core:
+    path: ../core
   dependencies: 
     path: ../dependencies
   
