@@ -6,10 +6,10 @@ import 'package:todo_module/src/domain/entities/todo_entity.dart';
 import 'package:todo_module/src/domain/repositories/i_todo_repository.dart';
 import 'package:todo_module/src/domain/usecases/add_todo_usecase.dart';
 
-class TodoRepository extends Mock implements ITodoRepository {}
+class TodoRepositoryMock extends Mock implements ITodoRepository {}
 
 void main() {
-  final ITodoRepository repository = TodoRepository();
+  final ITodoRepository repository = TodoRepositoryMock();
   final useCase = AddTodoUseCase(repository);
 
   setUpAll(() {});
@@ -62,8 +62,10 @@ void main() {
     'Should throw a InvalidTargetDateFailure when user inputs a targetDate that is today or before',
     () {
       //Arrange
-      final params =
-          AddTodoDto(title: 'Title', description: 'description', targetDate: DateTime.now());
+      final params = AddTodoDto(
+          title: 'Title',
+          description: 'description',
+          targetDate: DateTime.now());
 
       //Assert
       expect(
