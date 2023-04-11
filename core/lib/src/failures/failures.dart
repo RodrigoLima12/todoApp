@@ -41,3 +41,11 @@ class UnknownFailure extends AppFailure {
     super.exception,
   });
 }
+
+class ServerFailure extends AppFailure {
+  ServerFailure({
+    required super.message,
+    super.stackTrace,
+    super.exception,
+  });
+}
