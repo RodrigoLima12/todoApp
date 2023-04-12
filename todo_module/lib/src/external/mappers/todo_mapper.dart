@@ -8,7 +8,7 @@ class TodoMapper {
 
   static Map<String, dynamic> dtoToMap(AddTodoDto dto) {
     return {
-      'id': Random().nextInt(9999).toString(),
+      'id': Random().nextInt(9999),
       'title': dto.title,
       'description': dto.description,
       'targetDate': dto.targetDate.millisecondsSinceEpoch,
@@ -23,8 +23,9 @@ class TodoMapper {
       description: map['description'],
       createdAt: DateTime.fromMillisecondsSinceEpoch(map['createdAt']),
       targetDate: DateTime.fromMillisecondsSinceEpoch(map['targetDate']),
-      executedAt:
-          map['executedAt'] != null ? DateTime.fromMillisecondsSinceEpoch(map['executedAt']) : null,
+      executedAt: map['executedAt'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(map['executedAt'])
+          : null,
     );
   }
 }
