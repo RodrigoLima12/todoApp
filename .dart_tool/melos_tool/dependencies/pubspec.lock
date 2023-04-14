@@ -73,13 +73,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.1"
-  core:
-    dependency: "direct main"
-    description:
-      path: "../core"
-      relative: true
-    source: path
-    version: "0.0.1"
   coverage:
     dependency: transitive
     description:
@@ -96,21 +89,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.2"
-  cupertino_icons:
-    dependency: "direct main"
-    description:
-      name: cupertino_icons
-      sha256: e35129dc44c9118cee2a5603506d823bab99c68393879edb440e0090d07586be
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.5"
-  dependencies:
-    dependency: "direct main"
-    description:
-      path: "../dependencies"
-      relative: true
-    source: path
-    version: "0.0.1"
   fake_async:
     dependency: transitive
     description:
@@ -141,7 +119,7 @@ packages:
     source: hosted
     version: "2.0.1"
   flutter_modular:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: flutter_modular
       sha256: "061f0bcc8f8c438d4c82f4ff70a9e61f109961c92b4e1eaf1bbfab75f577fe0e"
@@ -162,7 +140,7 @@ packages:
     source: sdk
     version: "0.0.0"
   flutter_triple:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: flutter_triple
       sha256: "0ac957e64d818f69a45d01a24f3d7465cd8dda9142718d210d63a7890eb2a550"
@@ -185,14 +163,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
-  hive:
-    dependency: transitive
-    description:
-      name: hive
-      sha256: "8dcf6db979d7933da8217edcec84e9df1bdb4e4edc7fc77dbd5aa74356d6d941"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.2.3"
   http_multi_server:
     dependency: transitive
     description:
@@ -274,7 +244,7 @@ packages:
     source: hosted
     version: "1.0.4"
   mocktail:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: mocktail
       sha256: "80a996cd9a69284b3dc521ce185ffe9150cde69767c2d3a0720147d93c0cef53"
@@ -470,13 +440,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.4.20"
-  todo_module:
-    dependency: "direct main"
-    description:
-      path: "../todo_module"
-      relative: true
-    source: path
-    version: "0.0.1"
   triple:
     dependency: transitive
     description:
@@ -521,10 +484,10 @@ packages:
     dependency: transitive
     description:
       name: web_socket_channel
-      sha256: ca49c0bc209c687b887f30527fb6a9d80040b072cc2990f34b9bec3e7663101b
+      sha256: d88238e5eac9a42bb43ca4e721edba3c08c6354d4a53063afaa568516217621b
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.0"
+    version: "2.4.0"
   webkit_inspection_protocol:
     dependency: transitive
     description:
@@ -543,3 +506,4 @@ packages:
     version: "3.1.1"
 sdks:
   dart: ">=2.19.4 <3.0.0"
+  flutter: ">=1.17.0"
