@@ -2,8 +2,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:todo_module/src/presenter/controllers/form_controller.dart';
+import 'package:todo_module/src/presenter/pages/widgets/todo_form_widget.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   final FormController formController;
   const HomePage({
     Key? key,
@@ -11,52 +12,16 @@ class HomePage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  DateTime selectedDate = DateTime.now().add(const Duration(days: 1));
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('TO DO'),
       ),
-      body: Column(
-        children: [
-          TextField(
-            decoration: const InputDecoration(labelText: 'Título'),
-            controller: widget.formController.titleController,
-          ),
-          TextField(
-            decoration: const InputDecoration(labelText: 'Descrição'),
-            controller: widget.formController.descriptionController,
-          ),
-          GestureDetector(
-            onTap: () async {
-              final tomorrow = DateTime.now().add(const Duration(days: 1));
-              final lastDate = DateTime.now().add(const Duration(days: 30));
-              final result = await showDatePicker(
-                context: context,
-                initialDate: tomorrow,
-                firstDate: tomorrow,
-                lastDate: lastDate,
-              );
-              if (result == null) {
-                return;
-              } else {
-                setState(() {
-                  selectedDate = result;
-                });
-              }
-            },
-            child: Text(selectedDate.toString()),
-          )
-        ],
-      ),
+      body: TodoFormWidget(formController: formController),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: () {
+          formController.add();
+        },
         label: const Text('Adicionar'),
       ),
     );
