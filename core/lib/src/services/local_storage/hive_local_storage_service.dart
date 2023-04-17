@@ -22,8 +22,17 @@ class HiveLocalStorageService implements ILocalStorageService {
   }
 
   @override
-  Future<bool> add(String key, Map<String, dynamic> value) {
-    // TODO: implement add
-    throw UnimplementedError();
+  Future<bool> add(String key, Map<String, dynamic> value) async {
+    var listValue = await box.get(key) as List? ?? [];
+
+    final iterable = listValue.where((element) => element['id'] == value['id']);
+
+    if (iterable.isNotEmpty) return false;
+
+    listValue.add(value);
+
+    await box.put(key, listValue);
+
+    return true;
   }
 }

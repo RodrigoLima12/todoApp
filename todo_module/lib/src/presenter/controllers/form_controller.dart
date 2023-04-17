@@ -1,4 +1,6 @@
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+import 'package:todo_module/src/domain/dtos/add_todo_dto.dart';
 
 import 'package:todo_module/src/presenter/stores/add_todo_store.dart';
 
@@ -13,7 +15,17 @@ class FormController {
 
   final AddTodoStore store;
 
-  FormController({required this.store});
+  FormController({required this.store}) {
+    store.observer(
+      onError: (e) {
+        SnackbarService.instance.showSnackbar(
+          SnackBar(
+            content: Text(e.message),
+          ),
+        );
+      },
+    );
+  }
 
   void changeDate(DateTime? date) {
     if (date == null) return;
@@ -21,8 +33,16 @@ class FormController {
     dateNotifier.value = date;
   }
 
-  void add() {
+  Future<void> add() async {
     final isValid = formKey.currentState!.validate();
     if (!isValid) return;
+
+    AddTodoDto dto = AddTodoDto(
+      title: titleController.text,
+      description: descriptionController.text,
+      targetDate: dateNotifier.value,
+    );
+
+    await store.addTodo(dto);
   }
 }

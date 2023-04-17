@@ -22,7 +22,18 @@ class HomePage extends StatelessWidget {
         onPressed: () {
           formController.add();
         },
-        label: const Text('Adicionar'),
+        label: ValueListenableBuilder(
+          valueListenable: formController.store.selectLoading,
+          builder: (_, isloading, child) {
+            if (isloading) {
+              return const CircularProgressIndicator(
+                backgroundColor: Colors.cyan,
+              );
+            }
+            return child!;
+          },
+          child: const Text('Adicionar'),
+        ),
       ),
     );
   }

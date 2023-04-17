@@ -12,9 +12,10 @@ class AddTodoStore extends Store<bool> {
 
   final AddTodoUseCase _addTodoUseCase;
 
-  void addTodo(AddTodoDto dto) async {
+  Future<void> addTodo(AddTodoDto dto) async {
     try {
       setLoading(true);
+      await Future.delayed(Duration(seconds: 2));
       await _addTodoUseCase(dto);
 
       update(true);
