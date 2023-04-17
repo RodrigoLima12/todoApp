@@ -14,7 +14,8 @@ class TodoFormWidget extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding:
+                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
             child: TextFormField(
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) {
@@ -28,7 +29,8 @@ class TodoFormWidget extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding:
+                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
             child: TextFormField(
               autovalidateMode: AutovalidateMode.onUserInteraction,
               validator: (value) {
@@ -59,7 +61,10 @@ class TodoFormWidget extends StatelessWidget {
                   );
                   formController.changeDate(result);
                 },
-                child: Text(date.toString()),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 16.0),
+                  child: Text(date.toString()),
+                ),
               );
             },
           )
