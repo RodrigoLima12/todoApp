@@ -3,8 +3,10 @@ import 'package:todo_module/src/domain/usecases/add_todo_usecase.dart';
 import 'package:todo_module/src/external/datasources/todo_datasource.dart';
 import 'package:todo_module/src/infra/repositories/todo_repository.dart';
 import 'package:todo_module/src/presenter/controllers/form_controller.dart';
+import 'package:todo_module/src/presenter/pages/add_todo_page.dart';
 import 'package:todo_module/src/presenter/pages/home_page.dart';
 import 'package:todo_module/src/presenter/stores/add_todo_store.dart';
+import 'package:todo_module/src/presenter/stores/todos_store.dart';
 
 class TodoModule extends Module {
   @override
@@ -12,16 +14,20 @@ class TodoModule extends Module {
         Bind.lazySingleton((i) => TodoDatasource(i())),
         Bind.lazySingleton((i) => TodoRepository(i())),
         Bind.lazySingleton((i) => AddTodoUseCase(i())),
-        Bind.lazySingleton((i) => AddTodoStore(i())),
-        Bind.lazySingleton((i) => FormController(store: i())),
+        Bind.factory((i) => AddTodoStore(i())),
+        Bind.lazySingleton((i) => TodosStore(i())),
+        Bind.factory((i) => FormController(store: i(), todosStore: i())),
       ];
 
   @override
   List<ModularRoute> get routes => [
         ChildRoute(
           '/',
-          child: (_, __) =>
-              HomePage(formController: Modular.get<FormController>()),
+          child: (_, __) => HomePage(store: Modular.get<TodosStore>()),
+        ),
+        ChildRoute(
+          '/add',
+          child: (_, __) => AddTodoPage(formController: Modular.get<FormController>()),
         ),
       ];
 }

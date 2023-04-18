@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:todo_module/src/domain/dtos/add_todo_dto.dart';
 
 import 'package:todo_module/src/presenter/stores/add_todo_store.dart';
+import 'package:todo_module/src/presenter/stores/todos_store.dart';
 
 class FormController {
   final TextEditingController titleController = TextEditingController();
@@ -10,12 +11,12 @@ class FormController {
 
   final formKey = GlobalKey<FormState>();
 
-  final dateNotifier =
-      ValueNotifier(DateTime.now().add(const Duration(days: 1)));
+  final dateNotifier = ValueNotifier(DateTime.now().add(const Duration(days: 1)));
 
   final AddTodoStore store;
+  final TodosStore todosStore;
 
-  FormController({required this.store}) {
+  FormController({required this.store, required this.todosStore}) {
     store.observer(
       onError: (e) {
         SnackbarService.instance.showSnackbar(
@@ -44,5 +45,6 @@ class FormController {
     );
 
     await store.addTodo(dto);
+    await todosStore.getTodos();
   }
 }
