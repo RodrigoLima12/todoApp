@@ -15,6 +15,7 @@ dependencies:
   path_provider: 2.0.14
   dependencies:
     path: ../dependencies
+  connectivity_plus: ^3.0.4
 
 dev_dependencies:
   flutter_test:

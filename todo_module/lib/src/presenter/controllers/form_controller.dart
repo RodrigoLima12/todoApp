@@ -1,4 +1,5 @@
 import 'package:core/core.dart';
+import 'package:dependencies/dependencies.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_module/src/domain/dtos/add_todo_dto.dart';
 
@@ -46,5 +47,6 @@ class FormController {
 
     await store.addTodo(dto);
     await todosStore.getTodos();
+    Modular.to.pop();
   }
 }

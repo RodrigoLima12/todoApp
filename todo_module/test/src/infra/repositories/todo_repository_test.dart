@@ -8,12 +8,12 @@ import 'package:todo_module/src/infra/repositories/todo_repository.dart';
 
 import '../../mocks/mocks.dart';
 
-class TodoDatasourceMock extends Mock implements ITodoDatasource {}
+class TodoDatasourceMock extends Mock implements ITodoLocalDatasource {}
 
 class AddTodoDtoMock extends Mock implements AddTodoDto {}
 
 void main() {
-  final ITodoDatasource datasource = TodoDatasourceMock();
+  final ITodoLocalDatasource datasource = TodoDatasourceMock();
 
   final sut = TodoRepository(datasource);
 
@@ -56,8 +56,7 @@ void main() {
     () async {
       //Arrange
       final params = AddTodoDtoMock();
-      when(() => datasource.add(params))
-          .thenAnswer((_) async => TodoEntityMock());
+      when(() => datasource.add(params)).thenAnswer((_) async => TodoEntityMock());
 
       //Act
       final result = await sut.add(params);

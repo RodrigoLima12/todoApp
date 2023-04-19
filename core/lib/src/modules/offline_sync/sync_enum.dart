@@ -1,0 +1,1 @@
+enum SyncOperationEnum { add, edit }

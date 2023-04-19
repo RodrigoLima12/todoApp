@@ -9,7 +9,7 @@ class LocalStorageServiceMock extends Mock implements ILocalStorageService {}
 
 void main() {
   final service = LocalStorageServiceMock();
-  final sut = TodoDatasource(service);
+  final sut = TodoLocalDatasource(service);
   final params = AddTodoDto(
     description: '',
     targetDate: DateTime.now(),
