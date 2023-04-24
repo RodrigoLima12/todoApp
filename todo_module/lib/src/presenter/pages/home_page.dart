@@ -9,7 +9,14 @@ import 'package:todo_module/src/presenter/stores/todos_store.dart';
 class HomePage extends StatefulWidget {
   final TodosStore store;
   final ConnectionStore connectionStore;
-  const HomePage({Key? key, required this.store, required this.connectionStore}) : super(key: key);
+  final SyncStore syncStore;
+
+  const HomePage({
+    Key? key,
+    required this.store,
+    required this.connectionStore,
+    required this.syncStore,
+  }) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -18,10 +25,17 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   ConnectionStore get connectionStore => widget.connectionStore;
   TodosStore get store => widget.store;
+  SyncStore get syncStore => widget.syncStore;
+
   @override
   void initState() {
     super.initState();
     store.getTodos();
+  }
+
+  Future<void> sync() async {
+    await syncStore.sync();
+    await store.getTodos();
   }
 
   @override
@@ -30,7 +44,14 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text('TO DO'),
         actions: [
-          IconButton(onPressed: store.getTodos, icon: const Icon(Icons.refresh)),
+          IconButton(
+            onPressed: store.getTodos,
+            icon: const Icon(Icons.refresh),
+          ),
+          IconButton(
+            onPressed: sync,
+            icon: const Icon(Icons.sync),
+          ),
           Padding(
             padding: const EdgeInsets.only(right: 16.0),
             child: ValueListenableBuilder(
@@ -39,7 +60,6 @@ class _HomePageState extends State<HomePage> {
                 if (connectionStore.isOnline) {
                   return Icon(Icons.wifi);
                 }
-
                 return Icon(Icons.wifi_off);
               },
             ),

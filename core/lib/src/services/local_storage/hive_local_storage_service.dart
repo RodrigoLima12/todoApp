@@ -43,4 +43,9 @@ class HiveLocalStorageService implements ILocalStorageService {
     var result = listValue.map((e) => Map<String, dynamic>.from(e)).toList();
     return result;
   }
+
+  @override
+  Future<void> clear(String key) async {
+    await box.put(key, []);
+  }
 }

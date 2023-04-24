@@ -14,7 +14,7 @@ class TodoModule extends Module {
   @override
   List<Bind<Object>> get binds => [
         Bind.lazySingleton((i) => TodoRemoteDatasource(i())),
-        Bind.lazySingleton((i) => TodoLocalDatasource(i())),
+        Bind.lazySingleton((i) => TodoLocalDatasource(i(), i(), i())),
         Bind.lazySingleton((i) => TodoRepository(i(), i(), i())),
         Bind.lazySingleton((i) => AddTodoUseCase(i())),
         Bind.factory((i) => AddTodoStore(i())),
@@ -29,11 +29,13 @@ class TodoModule extends Module {
           child: (_, __) => HomePage(
             store: Modular.get<TodosStore>(),
             connectionStore: Modular.get<ConnectionStore>(),
+            syncStore: Modular.get<SyncStore>(),
           ),
         ),
         ChildRoute(
           '/add',
-          child: (_, __) => AddTodoPage(formController: Modular.get<FormController>()),
+          child: (_, __) =>
+              AddTodoPage(formController: Modular.get<FormController>()),
         ),
       ];
 }
