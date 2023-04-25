@@ -34,6 +34,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> sync() async {
+    SnackbarService.instance.showSnackbar(
+      const SnackBar(
+        content: Text('Sincronizando'),
+      ),
+    );
     await syncStore.sync();
     await store.getTodos();
   }
@@ -45,7 +50,14 @@ class _HomePageState extends State<HomePage> {
         title: const Text('TO DO'),
         actions: [
           IconButton(
-            onPressed: store.getTodos,
+            onPressed: () {
+              SnackbarService.instance.showSnackbar(
+                const SnackBar(
+                  content: Text('Carregando'),
+                ),
+              );
+              store.getTodos();
+            },
             icon: const Icon(Icons.refresh),
           ),
           IconButton(
@@ -58,9 +70,9 @@ class _HomePageState extends State<HomePage> {
               valueListenable: connectionStore.selectState,
               builder: (_, value, __) {
                 if (connectionStore.isOnline) {
-                  return Icon(Icons.wifi);
+                  return const Icon(Icons.wifi);
                 }
-                return Icon(Icons.wifi_off);
+                return const Icon(Icons.wifi_off);
               },
             ),
           ),
@@ -68,17 +80,27 @@ class _HomePageState extends State<HomePage> {
       ),
       body: ScopedBuilder<TodosStore, List<TodoEntity>>(
         store: store,
-        onState: (_, todos) => ListView.builder(
-          itemBuilder: (context, index) => Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              todos.elementAt(index).title,
-              style: const TextStyle(fontSize: 18),
-            ),
-          ),
-          itemCount: todos.length,
-        ),
         onLoading: (_) => const Center(child: CircularProgressIndicator()),
+        onState: (_, todos) {
+          if (todos.isEmpty) {
+            return const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Center(
+                child: Text('Insira uma tarefa'),
+              ),
+            );
+          }
+          return ListView.builder(
+            itemCount: todos.length,
+            itemBuilder: (context, index) => Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                todos.elementAt(index).title,
+                style: const TextStyle(fontSize: 18),
+              ),
+            ),
+          );
+        },
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
