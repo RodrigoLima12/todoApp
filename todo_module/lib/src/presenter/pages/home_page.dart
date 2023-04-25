@@ -3,6 +3,7 @@ import 'package:core/core.dart';
 import 'package:dependencies/dependencies.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_module/src/domain/entities/todo_entity.dart';
+import 'package:todo_l10n/todo_l10n.dart';
 
 import 'package:todo_module/src/presenter/stores/todos_store.dart';
 
@@ -35,8 +36,8 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> sync() async {
     SnackbarService.instance.showSnackbar(
-      const SnackBar(
-        content: Text('Sincronizando'),
+      SnackBar(
+        content: Text(context.l10n.sync),
       ),
     );
     await syncStore.sync();
@@ -52,8 +53,9 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             onPressed: () {
               SnackbarService.instance.showSnackbar(
-                const SnackBar(
-                  content: Text('Carregando'),
+                SnackBar(
+                  content: Text(AppLocalizations.of(context)!.loading),
+                  // content: Text(context.l10n.loading),
                 ),
               );
               store.getTodos();
@@ -83,10 +85,10 @@ class _HomePageState extends State<HomePage> {
         onLoading: (_) => const Center(child: CircularProgressIndicator()),
         onState: (_, todos) {
           if (todos.isEmpty) {
-            return const Padding(
-              padding: EdgeInsets.all(8.0),
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
               child: Center(
-                child: Text('Insira uma tarefa'),
+                child: Text(context.l10n.emptyTasks),
               ),
             );
           }
@@ -106,7 +108,7 @@ class _HomePageState extends State<HomePage> {
         onPressed: () {
           Modular.to.pushNamed('add');
         },
-        label: const Text('Adicionar'),
+        label: Text(context.l10n.add),
       ),
     );
   }

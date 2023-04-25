@@ -4,11 +4,13 @@ version: 0.0.1
 homepage:
 
 environment:
-  sdk: '>=2.19.6 <3.0.0'
+  sdk: '>=2.19.4 <3.0.0'
   flutter: ">=1.17.0"
 
 dependencies:
   flutter:
+    sdk: flutter
+  flutter_localizations:
     sdk: flutter
   intl: 0.17.0
 
@@ -22,6 +24,7 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  generate: true
 
   # To add assets to your package, add an assets section, like this:
   # assets:

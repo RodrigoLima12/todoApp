@@ -1,7 +1,8 @@
-library todo_l10n;
+import 'package:flutter/widgets.dart';
+import 'package:todo_l10n/gen/app_localizations.dart';
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
+export 'package:todo_l10n/gen/app_localizations.dart';
+
+extension AppLocalizationsX on BuildContext {
+  AppLocalizations get l10n => AppLocalizations.of(this)!;
 }

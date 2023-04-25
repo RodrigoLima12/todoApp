@@ -34,7 +34,8 @@ dependencies:
     path: ../dependencies
   core: 
     path: ../core
-    
+  todo_l10n:
+    path: ../todo_l10n
   todo_module:
     path: ../todo_module
 
